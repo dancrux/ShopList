@@ -1,7 +1,9 @@
 package com.cruxrepublic.shoping
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,9 +15,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Toast.makeText(this,"new fragment", Toast.LENGTH_SHORT).show()
         viewManager = LinearLayoutManager(this)
-                viewAdapter =ShopRecyclerAdapter()
+                viewAdapter =ShopRecyclerAdapter(this)
 
          recyclerView = findViewById<RecyclerView>(R.id.recycler_view).apply{
 //             if changes in content does not change layout size

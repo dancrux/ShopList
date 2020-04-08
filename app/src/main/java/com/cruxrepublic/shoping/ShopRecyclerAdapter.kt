@@ -1,15 +1,21 @@
 package com.cruxrepublic.shoping
 
+import android.content.Context
+import android.content.Intent
+import android.icu.text.Collator.getInstance
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import java.security.MessageDigest.getInstance
+import java.text.Collator.getInstance
+import kotlin.coroutines.coroutineContext
 
-class ShopRecyclerAdapter():
+class ShopRecyclerAdapter(var mContext: Context):
 RecyclerView.Adapter<ShopRecyclerAdapter.MyViewHolder>() {
 
     private  val titles = arrayOf("kid shoes","Electronics", "Unisex", "For men", "For Women",
@@ -19,27 +25,22 @@ RecyclerView.Adapter<ShopRecyclerAdapter.MyViewHolder>() {
     ,"Buy Quality Health Stuff", "Get Agric Equipments At an Affordable rate")
     private val image = R.drawable.background
 
-     class MyViewHolder(listView:View) : RecyclerView.ViewHolder(listView){
-        var itemTitle : TextView
-       var itemDetail: TextView
+    inner class MyViewHolder(listView:View) : RecyclerView.ViewHolder(listView){
 
+        var itemTitle : TextView = listView.findViewById(R.id.title)
+        var itemDetail: TextView = listView.findViewById(R.id.description)
 
         init {
-            itemTitle = listView.findViewById(R.id.title)
-            itemDetail =listView.findViewById(R.id.description)
+            listView.setOnClickListener { v: View? ->
 
-            listView.setOnClickListener {v: View ->
-                var detailFragment: DetailFragment = DetailFragment()
-
-
+                mContext.startActivity(Intent(mContext, DetailActivity::class.java))
 
             }
 
-        }
-    }
+            }
 
 
-
+     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val listView = LayoutInflater.from(parent.context)
@@ -54,6 +55,7 @@ RecyclerView.Adapter<ShopRecyclerAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
       holder.itemTitle.text = titles[position]
         holder.itemDetail.text = details[position]
+
 //        holder.itemImage.setImageResource(image)
 
 
